@@ -12,18 +12,30 @@ namespace Weatherman
 {
     class Program
     {
+        public static string GetUserName()
+        {
+            Console.WriteLine("What is your name?");
+            var userName = Console.ReadLine();
+            return userName;
+        }
+
+        public static string GetZipCode(string userName)
+        {
+            Console.WriteLine($"Welcome {userName}, please enter a zipcode");
+            var zipCode = Console.ReadLine();
+            return zipCode;
+        }
+
+
         static void Main(string[] args)
         {
             var localDate = DateTime.Now;
-            Console.WriteLine("What is your name?");
-            var userName = Console.ReadLine();
+            var userName = GetUserName();
             Console.WriteLine("");
-            Console.WriteLine($"Welcome {userName}, please enter a zipcode");
-            var zipCode = Console.ReadLine();
-            Console.WriteLine($"Thank you, {userName}, please enter a country code eg. us");
-            var countryCode = Console.ReadLine();
+            var zipCode = GetZipCode(userName);           
+            
 
-            var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + "," + countryCode + "&units=imperial&id=524901&APPID=ca27a9311ef37c705b0e639ecdfb29a6";
+            var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + ",us&units=imperial&id=524901&APPID=ca27a9311ef37c705b0e639ecdfb29a6";
 
             var request = WebRequest.Create(url);
 
