@@ -1,0 +1,8 @@
+C:\Users\prana\tiy\week-4\day-3\Weatherman\Weatherman\bin\Debug\Weatherman.exe.config
+C:\Users\prana\tiy\week-4\day-3\Weatherman\Weatherman\bin\Debug\Weatherman.exe
+C:\Users\prana\tiy\week-4\day-3\Weatherman\Weatherman\bin\Debug\Weatherman.pdb
+C:\Users\prana\tiy\week-4\day-3\Weatherman\Weatherman\bin\Debug\Newtonsoft.Json.dll
+C:\Users\prana\tiy\week-4\day-3\Weatherman\Weatherman\bin\Debug\Newtonsoft.Json.xml
+C:\Users\prana\tiy\week-4\day-3\Weatherman\Weatherman\obj\Debug\Weatherman.csprojResolveAssemblyReference.cache
+C:\Users\prana\tiy\week-4\day-3\Weatherman\Weatherman\obj\Debug\Weatherman.exe
+C:\Users\prana\tiy\week-4\day-3\Weatherman\Weatherman\obj\Debug\Weatherman.pdb
