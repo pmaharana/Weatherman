@@ -26,15 +26,8 @@ namespace Weatherman
             return zipCode;
         }
 
-
-        static void Main(string[] args)
+        public static RootObject  APIReader(string zipCode) //converts website data to string & then to class
         {
-            var localDate = DateTime.Now;
-            var userName = GetUserName();
-            Console.WriteLine("");
-            var zipCode = GetZipCode(userName);           
-            
-
             var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + ",us&units=imperial&id=524901&APPID=ca27a9311ef37c705b0e639ecdfb29a6";
 
             var request = WebRequest.Create(url);
@@ -45,21 +38,14 @@ namespace Weatherman
             using (var reader = new StreamReader(response.GetResponseStream()))
             {
                 rawResponse = reader.ReadToEnd();
-                
+
             }
-
             var weatherResult = JsonConvert.DeserializeObject<RootObject>(rawResponse);
-            Console.WriteLine($"Your name: {userName} Your location: {weatherResult.name} and your temperature: {weatherResult.main.temp} deg F");
-            Console.WriteLine($"The weather conditions: {weatherResult.weather[0].main} at {localDate}" );
+            return weatherResult;
+        }
 
-            const string connectionString =
-                @"Server=localhost\SQLEXPRESS;Database=Weatherman;Trusted_Connection=True;";
-
-
-
-
-
-
+        public static void InsertIntoSql(string connectionString, string userName, RootObject weatherResult)
+        {
             using (var connection = new SqlConnection(connectionString))
             {
 
@@ -76,6 +62,30 @@ namespace Weatherman
                 cmd.ExecuteNonQuery();
                 connection.Close();
             }
+        }
+
+        static void Main(string[] args)
+        {
+            var localDate = DateTime.Now;
+            var userName = GetUserName();
+            Console.WriteLine("");
+            var zipCode = GetZipCode(userName);
+
+            var weatherResult = APIReader(zipCode);
+
+
+            Console.WriteLine($"Your name: {userName} Your location: {weatherResult.name} and your temperature: {weatherResult.main.temp} deg F");
+            Console.WriteLine($"The weather conditions: {weatherResult.weather[0].main} at {localDate}" );
+
+            const string connectionString =
+                @"Server=localhost\SQLEXPRESS;Database=Weatherman;Trusted_Connection=True;";
+
+            InsertIntoSql(connectionString, userName, weatherResult);
+
+
+
+
+
         }
     }
 
